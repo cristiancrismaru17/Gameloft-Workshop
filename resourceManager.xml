@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceManager>
+	<models>
+		<model id="1">
+			<path>../Resources/Models/Train.nfg</path>
+		</model>
+		<model id="2">
+			<path>../Resources/Models/Bila.nfg</path>
+		</model>
+		<model id="3">
+			<path>../Resources/Models/Skybox.nfg</path>
+		</model>
+		<model id="4">
+			<path>../Resources/Models/fire.nfg</path>
+		</model>
+		<model id="6">
+			<path>../Resources/Models/House.nfg</path>
+		</model>
+	</models>
+	<shaders>
+		<shader id="1">
+			<vs>../Resources/Shaders/ObjVS.vs</vs>
+			<fs>../Resources/Shaders/ObjFS.fs</fs>
+		</shader>
+		<shader id="2">
+			<vs>../Resources/Shaders/solidObjVS.vs</vs>
+			<fs>../Resources/Shaders/solidObjFS.fs</fs>
+		</shader>
+		<shader id="3">
+			<vs>../Resources/Shaders/SkyboxVS.vs</vs>
+			<fs>../Resources/Shaders/SkyboxFS.fs</fs>
+		</shader>
+		<shader id="4">
+			<vs>../Resources/Shaders/debugVS.vs</vs>
+			<fs>../Resources/Shaders/debugFS.fs</fs>
+		</shader>
+		<shader id="5">
+			<vs>../Resources/Shaders/TerrainVS.vs</vs>
+			<fs>../Resources/Shaders/TerrainFS.fs</fs>
+		</shader>
+		<shader id="6">
+			<vs>../Resources/Shaders/fireVS.vs</vs>
+			<fs>../Resources/Shaders/fireFS.fs</fs>
+		</shader>
+	</shaders>
+	<textures>
+		<texture id="1" type="2d">
+			<path>../Resources/Textures/Train.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_CLAMP_TO_EDGE</wrap_s>
+			<wrap_t>GL_CLAMP_TO_EDGE</wrap_t>
+		</texture>
+		<texture id="3" type="cube">
+			<path>../Resources/Textures/envMap.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_CLAMP_TO_EDGE</wrap_s>
+			<wrap_t>GL_CLAMP_TO_EDGE</wrap_t>
+		</texture>
+		<texture id="5" type="2d">
+			<path>../Resources/Textures/Rock.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_REPEAT</wrap_s>
+			<wrap_t>GL_REPEAT</wrap_t>
+		</texture>
+		<texture id="6" type="2d">
+			<path>../Resources/Textures/Grass.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_REPEAT</wrap_s>
+			<wrap_t>GL_REPEAT</wrap_t>
+		</texture>
+		<texture id="7" type="2d">
+			<path>../Resources/Textures/Dirt.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_REPEAT</wrap_s>
+			<wrap_t>GL_REPEAT</wrap_t>
+		</texture>
+		<texture id="8" type="2d">
+			<path>../Resources/Textures/Terrain_blend_map.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_CLAMP_TO_EDGE</wrap_s>
+			<wrap_t>GL_CLAMP_TO_EDGE</wrap_t>
+		</texture>
+		<texture id="9" type="2d">
+			<path>../Resources/Textures/DisplacementMap.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_REPEAT</wrap_s>
+			<wrap_t>GL_REPEAT</wrap_t>
+		</texture>
+		<texture id="10" type="2d">
+			<path>../Resources/Textures/fire3.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_CLAMP_TO_EDGE</wrap_s>
+			<wrap_t>GL_CLAMP_TO_EDGE</wrap_t>
+		</texture>
+		<texture id="11" type="2d">
+			<path>../Resources/Textures/fire_mask.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_CLAMP_TO_EDGE</wrap_s>
+			<wrap_t>GL_CLAMP_TO_EDGE</wrap_t>
+		</texture>
+		<texture id="12" type="2d">
+			<path>../Resources/Textures/House.tga</path>
+			<min_filter>GL_LINEAR</min_filter>
+			<mag_filter>GL_LINEAR</mag_filter>
+			<wrap_s>GL_CLAMP_TO_EDGE</wrap_s>
+			<wrap_t>GL_CLAMP_TO_EDGE</wrap_t>
+		</texture>
+	</textures>
+
+</resourceManager>
