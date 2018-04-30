@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "../Utilities/utilities.h"
+#define NR_OF_LIGHTS 10
 
 struct Light
 {

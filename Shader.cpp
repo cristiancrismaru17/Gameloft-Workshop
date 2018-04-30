@@ -5,6 +5,98 @@
 #include "ResourceManager.h"
 #include "../Utilities/utilities.h"
 
+std::string PointAmbient(int i)
+{
+	std::string s;
+	s.assign("pointLights[");
+
+	char nr[11];
+	_itoa(i, nr, 10);
+
+	s.append(nr);
+	s.append("].ambient");
+
+	return s;
+}
+std::string PointConstant(int i)
+{
+	std::string s;
+	s.assign("pointLights[");
+
+	char nr[11];
+	_itoa(i, nr, 10);
+
+	s.append(nr);
+	s.append("].constant");
+
+	return s;
+}
+std::string PointLinear(int i)
+{
+	std::string s;
+	s.assign("pointLights[");
+
+	char nr[11];
+	_itoa(i, nr, 10);
+
+	s.append(nr);
+	s.append("].Linear");
+
+	return s;
+}
+std::string PointQuadratic(int i)
+{
+	std::string s;
+	s.assign("pointLights[");
+
+	char nr[11];
+	_itoa(i, nr, 10);
+
+	s.append(nr);
+	s.append("].quadratic");
+
+	return s;
+}
+std::string PointDiffuse(int i)
+{
+	std::string s;
+	s.assign("pointLights[");
+
+	char nr[11];
+	_itoa(i, nr, 10);
+
+	s.append(nr);
+	s.append("].diffuse");
+
+	return s;
+}
+std::string PointSpecular(int i)
+{
+	std::string s;
+	s.assign("pointLights[");
+
+	char nr[11];
+	_itoa(i, nr, 10);
+
+	s.append(nr);
+	s.append("].specular");
+
+	return s;
+}
+std::string PointPosition(int i)
+{
+	std::string s;
+	s.assign("pointLights[");
+
+	char nr[11];
+	_itoa(i, nr, 10);
+
+	s.append(nr);
+	s.append("].position");
+
+	return s;
+}
+
 void Shader::Load(int id)
 {
 	sr = ResourceManager::getInstance()->pShaderResource[id];
@@ -61,29 +153,16 @@ void Shader::Load(int id)
 	dirLightDirection = glGetUniformLocation(idProg, "dirLight.direction");
 	dirLightSpecular = glGetUniformLocation(idProg, "dirLight.specular");
 
-	pointLights0Ambient = glGetUniformLocation(idProg, "pointLights[0].ambient");
-	pointLights0Constant = glGetUniformLocation(idProg, "pointLights[0].constant");
-	pointLights0Diffuse = glGetUniformLocation(idProg, "pointLights[0].diffuse");
-	pointLights0Linear = glGetUniformLocation(idProg, "pointLights[0].linear");
-	pointLights0Position = glGetUniformLocation(idProg, "pointLights[0].position");
-	pointLights0Quadratic = glGetUniformLocation(idProg, "pointLights[0].quadratic");
-	pointLights0Specular = glGetUniformLocation(idProg, "pointLights[0].specular");
-	
-	pointLights1Ambient = glGetUniformLocation(idProg, "pointLights[1].ambient");
-	pointLights1Constant = glGetUniformLocation(idProg, "pointLights[1].constant");
-	pointLights1Diffuse = glGetUniformLocation(idProg, "pointLights[1].diffuse");
-	pointLights1Linear = glGetUniformLocation(idProg, "pointLights[1].linear");
-	pointLights1Position = glGetUniformLocation(idProg, "pointLights[1].position");
-	pointLights1Quadratic = glGetUniformLocation(idProg, "pointLights[1].quadratic");
-	pointLights1Specular = glGetUniformLocation(idProg, "pointLights[1].specular");
-
-	pointLights2Ambient = glGetUniformLocation(idProg, "pointLights[2].ambient");
-	pointLights2Constant = glGetUniformLocation(idProg, "pointLights[2].constant");
-	pointLights2Diffuse = glGetUniformLocation(idProg, "pointLights[2].diffuse");
-	pointLights2Linear = glGetUniformLocation(idProg, "pointLights[2].linear");
-	pointLights2Position = glGetUniformLocation(idProg, "pointLights[2].position");
-	pointLights2Quadratic = glGetUniformLocation(idProg, "pointLights[2].quadratic");
-	pointLights2Specular = glGetUniformLocation(idProg, "pointLights[2].specular");
+	for (int i = 0; i < NR_OF_LIGHTS ; i++)
+	{
+		pointLightsAmbient[i] = glGetUniformLocation(idProg, PointAmbient(i).c_str());
+		pointLightsDiffuse[i] = glGetUniformLocation(idProg, PointDiffuse(i).c_str());
+		pointLightsPosition[i] = glGetUniformLocation(idProg, PointPosition(i).c_str());
+		pointLightsSpecular[i] = glGetUniformLocation(idProg, PointSpecular(i).c_str());
+		pointLightsConstant[i] = glGetUniformLocation(idProg, PointConstant(i).c_str());
+		pointLightsQuadratic[i] = glGetUniformLocation(idProg, PointQuadratic(i).c_str());
+		pointLightsLinear[i] = glGetUniformLocation(idProg, PointLinear(i).c_str());
+	}
 
 	spotLightAmbient = glGetUniformLocation(idProg, "spotLight.ambient");
 	spotLightConstant = glGetUniformLocation(idProg, "spotLight.constant");

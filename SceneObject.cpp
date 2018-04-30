@@ -7,6 +7,7 @@
 #include "Skybox.h"
 #include "Fire.h"
 #include "AmbientLight.h"
+#include "Light.h"
 #include "../Utilities/utilities.h"
 
 SceneObject::SceneObject()
@@ -204,214 +205,54 @@ void SceneObject::SendCommonData()
 		else if (i->second->type.compare("point") == 0)
 		{
 			light = i->second;
-			if (light->pointID == 0)
+			if (shader->pointLightsAmbient[light->pointID] != -1)
 			{
-				if (shader->pointLights0Ambient != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights0Ambient);
-					glUniform3f(shader->pointLights0Ambient, sm->ambientLight->color[0], sm->ambientLight->color[1], sm->ambientLight->color[2]);
-				}
+				glEnableVertexAttribArray(shader->pointLightsAmbient[light->pointID]);
+				glUniform3f(shader->pointLightsAmbient[light->pointID], sm->ambientLight->color[0], sm->ambientLight->color[1], sm->ambientLight->color[2]);
+			}
 
-				if (shader->pointLights0Constant != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights0Constant);
-					glUniform1f(shader->pointLights0Constant, 1.0f);
-				}
+			if (shader->pointLightsConstant[light->pointID] != -1)
+			{
+				glEnableVertexAttribArray(shader->pointLightsConstant[light->pointID]);
+				glUniform1f(shader->pointLightsConstant[light->pointID], 1.0f);
+			}
 
-				if (shader->pointLights0Diffuse != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights0Diffuse);
-					glUniform3f(shader->pointLights0Diffuse, light->diffColor[0], light->diffColor[1], light->diffColor[2]);
-				}
+			if (shader->pointLightsDiffuse[light->pointID] != -1)
+			{
+				glEnableVertexAttribArray(shader->pointLightsDiffuse[light->pointID]);
+				glUniform3f(shader->pointLightsDiffuse[light->pointID], light->diffColor[0], light->diffColor[1], light->diffColor[2]);
+			}
 
-				if (shader->pointLights0Linear != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights0Linear);
-					glUniform1f(shader->pointLights0Linear, 0.09f);
-				}
+			if (shader->pointLightsLinear[light->pointID] != -1)
+			{
+				glEnableVertexAttribArray(shader->pointLightsLinear[light->pointID]);
+				glUniform1f(shader->pointLightsLinear[light->pointID], 0.09f);
+			}
 
-				if (shader->pointLights0Position != -1)
+			if (shader->pointLightsPosition[light->pointID] != -1)
+			{
+				if (light->followingObj != -1)
 				{
-					if (light->followingObj != -1)
-					{
-						glEnableVertexAttribArray(shader->pointLights0Position);
-						sm->sceneObjects[light->followingObj]->position[0];
-						glUniform3f(shader->pointLights0Position, sm->sceneObjects[light->followingObj]->position[0], sm->sceneObjects[light->followingObj]->position[1], sm->sceneObjects[light->followingObj]->position[2]);
-					}
-					else
-					{
-						glEnableVertexAttribArray(shader->pointLights0Position);
-						glUniform3f(shader->pointLights0Position, light->pos[0], light->pos[1], light->pos[2]);
-					}
+					glEnableVertexAttribArray(shader->pointLightsPosition[light->pointID]);
+					glUniform3f(shader->pointLightsPosition[light->pointID], sm->sceneObjects[light->followingObj]->position[0], sm->sceneObjects[light->followingObj]->position[1], sm->sceneObjects[light->followingObj]->position[2]);
 				}
-
-				if (shader->pointLights0Quadratic != -1)
+				else
 				{
-					glEnableVertexAttribArray(shader->pointLights0Quadratic);
-					glUniform1f(shader->pointLights0Quadratic, 0.032f);
-				}
-
-				if (shader->pointLights0Specular != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights0Specular);
-					glUniform3f(shader->pointLights0Specular, light->specColor[0], light->specColor[1], light->specColor[2]);
+					glEnableVertexAttribArray(shader->pointLightsPosition[light->pointID]);
+					glUniform3f(shader->pointLightsPosition[light->pointID], light->pos[0], light->pos[1], light->pos[2]);
 				}
 			}
-			else if (light->pointID == 1)
+
+			if (shader->pointLightsQuadratic[light->pointID] != -1)
 			{
-				if (shader->pointLights1Ambient != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights1Ambient);
-					glUniform3f(shader->pointLights1Ambient, sm->ambientLight->color[0], sm->ambientLight->color[1], sm->ambientLight->color[2]);
-				}
-
-				if (shader->pointLights1Constant != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights1Constant);
-					glUniform1f(shader->pointLights1Constant, 1.0f);
-				}
-
-				if (shader->pointLights1Diffuse != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights1Diffuse);
-					glUniform3f(shader->pointLights1Diffuse, light->diffColor[0], light->diffColor[1], light->diffColor[2]);
-				}
-
-				if (shader->pointLights1Linear != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights1Linear);
-					glUniform1f(shader->pointLights1Linear, 0.09f);
-				}
-
-				if (shader->pointLights1Position != -1)
-				{
-					if (light->followingObj != -1)
-					{
-						glEnableVertexAttribArray(shader->pointLights1Position);
-						glUniform3f(shader->pointLights1Position, sm->sceneObjects[light->followingObj]->position[0], sm->sceneObjects[light->followingObj]->position[1], sm->sceneObjects[light->followingObj]->position[2]);
-					}
-					else
-					{
-						glEnableVertexAttribArray(shader->pointLights1Position);
-						glUniform3f(shader->pointLights1Position, light->pos[0], light->pos[1], light->pos[2]);
-					}
-				}
-
-				if (shader->pointLights1Quadratic != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights1Quadratic);
-					glUniform1f(shader->pointLights1Quadratic, 0.032f);
-				}
-
-				if (shader->pointLights1Specular != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights1Specular);
-					glUniform3f(shader->pointLights1Specular, light->specColor[0], light->specColor[1], light->specColor[2]);
-				}
+				glEnableVertexAttribArray(shader->pointLightsQuadratic[light->pointID]);
+				glUniform1f(shader->pointLightsQuadratic[light->pointID], 0.032f);
 			}
-			else if (light->pointID == 2)
+
+			if (shader->pointLightsSpecular[light->pointID] != -1)
 			{
-				if (shader->pointLights2Ambient != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights2Ambient);
-					glUniform3f(shader->pointLights2Ambient, sm->ambientLight->color[0], sm->ambientLight->color[1], sm->ambientLight->color[2]);
-				}
-
-				if (shader->pointLights2Constant != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights2Constant);
-					glUniform1f(shader->pointLights2Constant, 1.0f);
-				}
-
-				if (shader->pointLights2Diffuse != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights2Diffuse);
-					glUniform3f(shader->pointLights2Diffuse, light->diffColor[0], light->diffColor[1], light->diffColor[2]);
-				}
-
-				if (shader->pointLights2Linear != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights2Linear);
-					glUniform1f(shader->pointLights2Linear, 0.09f);
-				}
-
-				if (shader->pointLights2Position != -1)
-				{
-					if (light->followingObj != -1)
-					{
-						glEnableVertexAttribArray(shader->pointLights2Position);
-						glUniform3f(shader->pointLights2Position, sm->sceneObjects[light->followingObj]->position[0], sm->sceneObjects[light->followingObj]->position[1], sm->sceneObjects[light->followingObj]->position[2]);
-					}
-					else
-					{
-						glEnableVertexAttribArray(shader->pointLights2Position);
-						glUniform3f(shader->pointLights2Position, light->pos[0], light->pos[1], light->pos[2]);
-					}
-				}
-
-				if (shader->pointLights2Quadratic != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights2Quadratic);
-					glUniform1f(shader->pointLights2Quadratic, 0.032f);
-				}
-
-				if (shader->pointLights2Specular != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights2Specular);
-					glUniform3f(shader->pointLights2Specular, light->specColor[0], light->specColor[1], light->specColor[2]);
-				}
-			}
-			else if (light->pointID == 3)
-			{
-				if (shader->pointLights3Ambient != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights3Ambient);
-					glUniform3f(shader->pointLights3Ambient, sm->ambientLight->color[0], sm->ambientLight->color[1], sm->ambientLight->color[2]);
-				}
-
-				if (shader->pointLights3Constant != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights3Constant);
-					glUniform1f(shader->pointLights3Constant, 1.0f);
-				}
-
-				if (shader->pointLights3Diffuse != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights3Diffuse);
-					glUniform3f(shader->pointLights3Diffuse, light->diffColor[0], light->diffColor[1], light->diffColor[2]);
-				}
-
-				if (shader->pointLights3Linear != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights3Linear);
-					glUniform1f(shader->pointLights3Linear, 0.09f);
-				}
-
-				if (shader->pointLights3Position != -1)
-				{
-					if (light->followingObj != -1)
-					{
-						glEnableVertexAttribArray(shader->pointLights3Position);
-						glUniform3f(shader->pointLights3Position, sm->sceneObjects[light->followingObj]->position[0], sm->sceneObjects[light->followingObj]->position[1], sm->sceneObjects[light->followingObj]->position[2]);
-					}
-					else
-					{
-						glEnableVertexAttribArray(shader->pointLights3Position);
-						glUniform3f(shader->pointLights3Position, light->pos[0], light->pos[1], light->pos[2]);
-					}
-				}
-
-				if (shader->pointLights3Quadratic != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights3Quadratic);
-					glUniform1f(shader->pointLights3Quadratic, 0.032f);
-				}
-
-				if (shader->pointLights3Specular != -1)
-				{
-					glEnableVertexAttribArray(shader->pointLights3Specular);
-					glUniform3f(shader->pointLights3Specular, light->specColor[0], light->specColor[1], light->specColor[2]);
-				}
+				glEnableVertexAttribArray(shader->pointLightsSpecular[light->pointID]);
+				glUniform3f(shader->pointLightsSpecular[light->pointID], light->specColor[0], light->specColor[1], light->specColor[2]);
 			}
 		}
 		else if (i->second->type.compare("spotlight") == 0)
