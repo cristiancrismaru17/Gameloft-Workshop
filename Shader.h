@@ -1,6 +1,6 @@
 #pragma once
-#include "Light.h"
 #include "ShaderResource.h"
+#include "Light.h"
 #include "../Utilities/utilities.h"
 
 class Shader
@@ -39,10 +39,6 @@ public:
 	GLint pointLightsLinear[NR_OF_LIGHTS];
 	GLint pointLightsQuadratic[NR_OF_LIGHTS];
 
-	GLint cellsX;
-	GLint cellsY;
-	GLint cellSize;
-
 	GLint spotLightPosition;
 	GLint spotLightDirection;
 	GLint spotLightAmbient;
@@ -51,7 +47,8 @@ public:
 	GLint spotLightConstant;
 	GLint spotLightLinear;
 	GLint spotLightQuadratic;
-	GLint spotLightConeAngle;
+	GLint spotLightCutOff;
+	GLint spotLightOuterCutOff;
 
 	GLint materialAmbient;
 	GLint materialDiffuse;

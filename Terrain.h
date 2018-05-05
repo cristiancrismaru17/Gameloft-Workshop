@@ -2,11 +2,9 @@
 #include "SceneObject.h"
 
 
-class Terrain : public SceneObject
+class Terrain :
+	public SceneObject
 {
-private:
-	int countX = 0;
-	int countZ = 0;
 public:
 	int horizontalCells;
 	int verticalCells;

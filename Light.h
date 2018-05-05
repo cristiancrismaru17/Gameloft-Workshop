@@ -1,11 +1,7 @@
 #pragma once
 #include <string>
-#include <stdio.h>
 #include "../Utilities/utilities.h"
-
-#ifndef NR_OF_LIGHTS
 #define NR_OF_LIGHTS 10
-#endif // !NR_OF_LIGHTS
 
 struct Light
 {

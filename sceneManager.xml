@@ -164,9 +164,9 @@
 				<z>0</z>
 			</rotation>
 			<scale>
-				<x>5000.0</x>
-				<y>5000.0</y>
-				<z>5000.0</z>
+				<x>1000.0</x>
+				<y>1000.0</y>
+				<z>1000.0</z>
 			</scale>
 			<followingCamera>
 				<cameras>
@@ -192,9 +192,9 @@
 				<texture id="7"></texture>
 				<texture id="8"></texture>
 			</textures>
-			<horizontalCells>20</horizontalCells>
-			<verticalCells>20</verticalCells>
-			<cellSize>500.0</cellSize>
+			<horizontalCells>50</horizontalCells>
+			<verticalCells>50</verticalCells>
+			<cellSize>50.0</cellSize>
 			<offsetY>-1.0</offsetY>
 			<scale>
 				<x>1.0</x>
@@ -446,26 +446,26 @@
 		<light id="6">
 			<type>spotlight</type>
 			<diffuseColor>
-				<r>1.0</r>
-				<g>1.0</g>
-				<b>0.2</b>
+				<r>0.0</r>
+				<g>0.0</g>
+				<b>1.0</b>
 			</diffuseColor>
 			<specularColor>
 				<r>1.0</r>
 				<g>1.0</g>
-				<b>0.8</b>
+				<b>1.0</b>s
 			</specularColor>
 			<pos>
-				<x>550</x>
+				<x>700</x>
 				<y>200</y>
-				<z>550</z>
+				<z>700</z>
 			</pos>
 			<direction>
 				<x>0</x>
 				<y>-1</y>
 				<z>0</z>
 			</direction>
-			<coneAngle>50</coneAngle>
+			<specPower>0.9</specPower>
 		</light>
 		<light id="7">
 			<type>ambiental</type>

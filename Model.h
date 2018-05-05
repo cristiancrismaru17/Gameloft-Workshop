@@ -19,7 +19,5 @@ public:
 	Vertex *vertices;
 	void Load(int id);
 	void LoadTerrain(int id);
-	void terrainTranslateX(int dir);
-	void terrainTranslateZ(int dir);
 	~Model();
 };
