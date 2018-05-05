@@ -2,6 +2,7 @@
 #include "Shader.h"
 #include <stdio.h>
 #include <string>
+#include "Light.h"
 #include "ResourceManager.h"
 #include "../Utilities/utilities.h"
 
@@ -147,6 +148,9 @@ void Shader::Load(int id)
 	cameraPos = glGetUniformLocation(idProg, "cameraPos");
 	skyColor = glGetUniformLocation(idProg, "skyColor");
 	solidColor = glGetUniformLocation(idProg, "solidColor");
+	cellsX = glGetUniformLocation(idProg, "cellsX");
+	cellsY = glGetUniformLocation(idProg, "cellsY");
+	cellSize = glGetUniformLocation(idProg, "cellSize");
 
 	dirLightAmbient = glGetUniformLocation(idProg, "dirLight.ambient");
 	dirLightDiffuse = glGetUniformLocation(idProg, "dirLight.diffuse");
@@ -166,11 +170,10 @@ void Shader::Load(int id)
 
 	spotLightAmbient = glGetUniformLocation(idProg, "spotLight.ambient");
 	spotLightConstant = glGetUniformLocation(idProg, "spotLight.constant");
-	spotLightCutOff = glGetUniformLocation(idProg, "spotLight.cutOff");
 	spotLightDiffuse = glGetUniformLocation(idProg, "spotLight.diffuse");
-	spotLightDirection = glGetUniformLocation(idProg, "spotLight.direction");
+	spotLightDirection = glGetUniformLocation(idProg, "spotLight.coneDirection");
 	spotLightLinear = glGetUniformLocation(idProg, "spotLight.linear");
-	spotLightOuterCutOff = glGetUniformLocation(idProg, "spotLight.outerCutOff");
+	spotLightConeAngle = glGetUniformLocation(idProg, "spotLight.coneAngle");
 	spotLightPosition = glGetUniformLocation(idProg, "spotLight.position");
 	spotLightQuadratic = glGetUniformLocation(idProg, "spotLight.quadratic");
 	spotLightSpecular = glGetUniformLocation(idProg, "spotLight.specular");

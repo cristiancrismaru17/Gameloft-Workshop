@@ -26,6 +26,11 @@ public:
 	GLint texRatio2;
 	GLint solidColor;
 
+	GLint cellsX;
+	GLint cellsY;
+	GLint cellSize;
+
+
 	GLint dirLightDirection;
 	GLint dirLightAmbient;
 	GLint dirLightDiffuse;
@@ -47,8 +52,7 @@ public:
 	GLint spotLightConstant;
 	GLint spotLightLinear;
 	GLint spotLightQuadratic;
-	GLint spotLightCutOff;
-	GLint spotLightOuterCutOff;
+	GLint spotLightConeAngle;
 
 	GLint materialAmbient;
 	GLint materialDiffuse;
