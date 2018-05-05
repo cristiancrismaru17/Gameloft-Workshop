@@ -181,11 +181,11 @@ void SceneManager::Init(char* fileDir, ESContext *esContext)
 				}
 				else if (lightType.compare("directional") == 0)
 				{
-					if (n->first_node("dir"))
+					if (n->first_node("direction"))
 					{
-						light->dir = Vector3((float)atof(n->first_node("dir")->first_node("x")->value()),
-							(float)atof(n->first_node("dir")->first_node("y")->value()),
-							(float)atof(n->first_node("dir")->first_node("z")->value()));
+						light->dir = Vector3((float)atof(n->first_node("direction")->first_node("x")->value()),
+							(float)atof(n->first_node("direction")->first_node("y")->value()),
+							(float)atof(n->first_node("direction")->first_node("z")->value()));
 					}
 				}
 				else if (lightType.compare("spotlight") == 0)
@@ -196,11 +196,11 @@ void SceneManager::Init(char* fileDir, ESContext *esContext)
 							(float)atof(n->first_node("pos")->first_node("y")->value()),
 							(float)atof(n->first_node("pos")->first_node("z")->value()));
 					}
-					if (n->first_node("dir"))
+					if (n->first_node("direction"))
 					{
-						light->dir = Vector3((float)atof(n->first_node("dir")->first_node("x")->value()),
-							(float)atof(n->first_node("dir")->first_node("y")->value()),
-							(float)atof(n->first_node("dir")->first_node("z")->value()));
+						light->dir = Vector3((float)atof(n->first_node("direction")->first_node("x")->value()),
+							(float)atof(n->first_node("direction")->first_node("y")->value()),
+							(float)atof(n->first_node("direction")->first_node("z")->value()));
 					}
 				}
 			}

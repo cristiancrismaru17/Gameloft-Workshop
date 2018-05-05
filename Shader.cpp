@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Shader.h"
+#include "Light.h"
 #include <stdio.h>
 #include <string>
 #include "ResourceManager.h"
@@ -133,6 +134,15 @@ void Shader::Load(int id)
 	transformationMatrix = glGetUniformLocation(idProg, "transformationMatrix");
 	projectionMatrix = glGetUniformLocation(idProg, "projectionMatrix");
 	viewMatrix = glGetUniformLocation(idProg, "viewMatrix");
+	texRatio = glGetUniformLocation(idProg, "texRatio");
+	texRatio2 = glGetUniformLocation(idProg, "texRatio2");
+	cameraPos = glGetUniformLocation(idProg, "cameraPos");
+	skyColor = glGetUniformLocation(idProg, "skyColor");
+	solidColor = glGetUniformLocation(idProg, "solidColor");
+	cellsX = glGetUniformLocation(idProg, "cellsX");
+	cellsY = glGetUniformLocation(idProg, "cellsY");
+	cellSize = glGetUniformLocation(idProg, "cellSize");
+
 	textureUniform[0] = glGetUniformLocation(idProg, "u_texture0");
 	textureUniform[1] = glGetUniformLocation(idProg, "u_texture1");
 	textureUniform[2] = glGetUniformLocation(idProg, "u_texture2");
@@ -142,11 +152,7 @@ void Shader::Load(int id)
 	textureUniform[6] = glGetUniformLocation(idProg, "u_texture6");
 	textureUniform[7] = glGetUniformLocation(idProg, "u_texture7");
 	textureUniform[8] = glGetUniformLocation(idProg, "u_texture8");
-	texRatio = glGetUniformLocation(idProg, "texRatio");
-	texRatio2 = glGetUniformLocation(idProg, "texRatio2");
-	cameraPos = glGetUniformLocation(idProg, "cameraPos");
-	skyColor = glGetUniformLocation(idProg, "skyColor");
-	solidColor = glGetUniformLocation(idProg, "solidColor");
+
 
 	dirLightAmbient = glGetUniformLocation(idProg, "dirLight.ambient");
 	dirLightDiffuse = glGetUniformLocation(idProg, "dirLight.diffuse");
@@ -166,14 +172,13 @@ void Shader::Load(int id)
 
 	spotLightAmbient = glGetUniformLocation(idProg, "spotLight.ambient");
 	spotLightConstant = glGetUniformLocation(idProg, "spotLight.constant");
-	spotLightCutOff = glGetUniformLocation(idProg, "spotLight.cutOff");
 	spotLightDiffuse = glGetUniformLocation(idProg, "spotLight.diffuse");
-	spotLightDirection = glGetUniformLocation(idProg, "spotLight.direction");
+	spotLightDirection = glGetUniformLocation(idProg, "spotLight.coneDirection");
 	spotLightLinear = glGetUniformLocation(idProg, "spotLight.linear");
-	spotLightOuterCutOff = glGetUniformLocation(idProg, "spotLight.outerCutOff");
 	spotLightPosition = glGetUniformLocation(idProg, "spotLight.position");
 	spotLightQuadratic = glGetUniformLocation(idProg, "spotLight.quadratic");
 	spotLightSpecular = glGetUniformLocation(idProg, "spotLight.specular");
+	spotLightConeAngle = glGetUniformLocation(idProg, "spotLight.coneAngle");
 
 	materialAmbient = glGetUniformLocation(idProg, "material.ambient");
 	materialDiffuse = glGetUniformLocation(idProg, "material.diffuse");

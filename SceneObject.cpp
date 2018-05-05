@@ -271,13 +271,6 @@ void SceneObject::SendCommonData()
 				glUniform1f(shader->spotLightConstant, 1.0f);
 			}
 
-
-			if (shader->spotLightCutOff != -1)
-			{
-				glEnableVertexAttribArray(shader->spotLightCutOff);
-				glUniform1f(shader->spotLightCutOff, (float)cos(12.5f * PI / 180.0f));
-			}
-
 			if (shader->spotLightDiffuse != -1)
 			{
 				glEnableVertexAttribArray(shader->spotLightDiffuse);
@@ -296,10 +289,10 @@ void SceneObject::SendCommonData()
 				glUniform1f(shader->spotLightLinear, 1.0f);
 			}
 
-			if (shader->spotLightOuterCutOff != -1)
+			if (shader->spotLightConeAngle != -1)
 			{
-				glEnableVertexAttribArray(shader->spotLightOuterCutOff);
-				glUniform1f(shader->spotLightOuterCutOff, (float)cos(15.5f * PI / 180.0f));
+				glEnableVertexAttribArray(shader->spotLightConeAngle);
+				glUniform1f(shader->spotLightConeAngle, 55.0);
 			}
 
 			if (shader->spotLightPosition != -1)

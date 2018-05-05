@@ -198,11 +198,6 @@ void Model::LoadTerrain(int id)
 		}
 	}
 
-	/*for (int i = 0; i < (to->verticalCells * to->horizontalCells) * 6; i++)
-	{
-		printf("indices[%d] = %d\n", i, indices[i]);
-	}*/
-
 	nrIndiciWired = 2 * nrIndici;
 
 	wfIndices = new GLushort[nrIndiciWired];
@@ -217,11 +212,6 @@ void Model::LoadTerrain(int id)
 		wfIndices[k++] = indices[i + 2];
 		wfIndices[k++] = indices[i];
 	}
-
-	/*for (int i = 0; i < nrIndiciWired; i++)
-	{
-		printf("wfindices[%d] = %d\n", i, wfIndices[i]);
-	}*/
 
 	glGenBuffers(1, &vboId);
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
@@ -239,6 +229,134 @@ void Model::LoadTerrain(int id)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+void Model::terrainTranslateZ(int dir)
+{
+	ResourceManager *rm = ResourceManager::getInstance();
+	Terrain *to;
+	to = (Terrain *)SceneManager::getInstance()->sceneObjects[5];
+
+	Vector2 *aux;
+	aux = (Vector2 *)calloc(to->horizontalCells, sizeof(Vector2));
+
+	if (dir > 0)
+	{
+
+		int k = 0;
+		for (int i = 0; i < to->horizontalCells + 1; i++)
+		{
+			aux[i] = rm->models[5]->vertices[k].uvBlend;
+			k++;
+		}
+
+		k = 0;
+		for (int i = 0; i < to->verticalCells; i++)
+		{
+			for (int j = 0; j < to->horizontalCells + 1; j++)
+			{
+				rm->models[5]->vertices[k].uvBlend = rm->models[5]->vertices[k + to->horizontalCells + 1].uvBlend;
+				k++;
+			}
+		}
+
+		k = (to->verticalCells) * (to->horizontalCells + 1);
+		for (int i = 0; i < to->horizontalCells + 1; i++)
+		{
+			rm->models[5]->vertices[k].uvBlend = aux[i];
+			k++;
+		}
+	}
+	else
+	{
+		int k = (to->verticalCells) * (to->horizontalCells + 1);
+		for (int i = 0; i < to->horizontalCells + 1; i++)
+		{
+			aux[i] = rm->models[5]->vertices[k].uvBlend;
+			k++;
+		}
+
+		k = (to->verticalCells + 1) * (to->horizontalCells + 1) - 1;
+		for (int g = to->verticalCells; g >= 0; g--)
+		{
+			for (int r = to->horizontalCells; r > 0; r--)
+			{
+				rm->models[5]->vertices[k].uvBlend = rm->models[5]->vertices[k - to->horizontalCells - 1].uvBlend;
+				k--;
+			}
+		}
+
+		k = 0;
+		for (int i = 0; i < to->horizontalCells + 1; i++)
+		{
+			rm->models[5]->vertices[k].uvBlend = aux[i];
+			k++;
+		}
+	}
+
+	glGenBuffers(1, &vboId);
+	glBindBuffer(GL_ARRAY_BUFFER, vboId);
+	glBufferData(GL_ARRAY_BUFFER, nrVertecsi * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+
+void Model::terrainTranslateX(int dir)
+{
+	ResourceManager *rm = ResourceManager::getInstance();
+	Terrain *to;
+	to = (Terrain *)SceneManager::getInstance()->sceneObjects[5];
+
+	Vector2 *aux;
+	aux = (Vector2 *)calloc(to->horizontalCells, sizeof(Vector2));
+
+	if (dir > 0)
+	{
+		for (int i = 0; i < to->verticalCells + 1; i++)
+		{
+			aux[i] = rm->models[5]->vertices[i * (to->horizontalCells + 1)].uvBlend;
+		}
+
+		for (int i = 0; i < to->horizontalCells; i++)
+		{
+			for (int j = 0; j < to->verticalCells + 1; j++)
+			{
+				rm->models[5]->vertices[i + j * (to->horizontalCells + 1)].uvBlend = rm->models[5]->vertices[i + j * (to->horizontalCells + 1) + 1].uvBlend;
+			}
+		}
+
+		int k = to->horizontalCells;
+		for (int i = 0; i < to->verticalCells + 1; i++)
+		{
+			rm->models[5]->vertices[k].uvBlend = aux[i];
+			k += to->horizontalCells + 1;
+		}
+	}
+	else
+	{
+
+		for (int i = 0; i < to->verticalCells + 1; i++)
+		{
+			aux[i] = rm->models[5]->vertices[i * (to->horizontalCells + 1) + to->horizontalCells].uvBlend;
+		}
+
+		for (int i = to->horizontalCells; i > 0; i--)
+		{
+			for (int j = to->verticalCells; j >= 0; j--)
+			{
+				rm->models[5]->vertices[i + j * (to->horizontalCells + 1)].uvBlend = rm->models[5]->vertices[i + j * (to->horizontalCells + 1) -1].uvBlend;
+			}
+		}
+
+		for (int i = 0; i < to->verticalCells + 1; i++)
+		{
+			rm->models[5]->vertices[i * (to->horizontalCells + 1)].uvBlend = aux[i];
+		}
+	}
+
+	glGenBuffers(1, &vboId);
+	glBindBuffer(GL_ARRAY_BUFFER, vboId);
+	glBufferData(GL_ARRAY_BUFFER, nrVertecsi * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
 
 Model::~Model()
 {
